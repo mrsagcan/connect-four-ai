@@ -2,8 +2,11 @@ class Board:
     HEIGHT = 7
     WIDTH = 8
 
-    def __init__(self):
-        self.board = [['.' for _ in range(8)] for _ in range(7)]
+    def __init__(self, orig=None):
+        if orig:
+            self.board = [list(col) for col in orig.board]
+        else:
+            self.board = [['.' for _ in range(8)] for _ in range(7)]
 
     def print_board(self):
         for row in self.board:
@@ -13,23 +16,25 @@ class Board:
     def make_children(self, player):
         children = []
         for i in range(self.WIDTH):
-            child = Board()
-            child.make_move_AI(player, i)
-            children.append((i, child))
+            child = Board(self)
+            should_append = child.make_move_AI(player, i)
+            if should_append:
+                children.append((i, child))
         return children
-    # Function control input value and move point in board
+
     def make_move_AI(self, player, column):
         if column < self.WIDTH :
             for i in range(self.HEIGHT - 1, -1, -1):
                 if self.board[i][column] == '.':
                     self.board[i][column] = player
-                    return
+                    return True
         else:
             print("Invalid input. AI has a error. The number between 0 and 7.")
+            return False
 
     # Function control input value and move point in board
     def make_move_manuel_player(self, player, column):
-        if column < self.WIDTH - 1:
+        if column < self.WIDTH:
             for i in range(self.HEIGHT - 1, -1, -1):
                 if self.board[i][column] == '.':
                     self.board[i][column] = player

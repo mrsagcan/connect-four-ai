@@ -46,7 +46,7 @@ class Game:
         print("Starting a game of Human vs AI...")
         # Code to start the game goes here
         ai = Ai(heuristic)
-        ai.depthLimit = 5
+        ai.depthLimit = 6
         while True:
 
             self.board.print_board()
@@ -61,6 +61,7 @@ class Game:
             if result != 0:
                 break
             move = ai.ai_move(self.board)
+            print("move "+ str(move))
             self.board.make_move_AI(self.player_2, move)
 
     def ai_vs_ai(self, heuristic_1, heuristic_2):
@@ -68,8 +69,8 @@ class Game:
         # Code to start the game goes here
         ai_1 = Ai(heuristic_1)
         ai_2 = Ai(heuristic_2)
-        ai_1.depthLimit = 7
-        ai_2.depthLimit = 7
+        ai_1.depthLimit = 6
+        ai_2.depthLimit = 6
         while True:
             self.board.print_board()
             result = self.board.check_board(self.player_1, self.player_2)
@@ -83,6 +84,7 @@ class Game:
             if result != 0:
                 break
             move = ai_2.ai_move(self.board)
+            print("move "+ str(move))
             self.board.make_move_AI(self.player_2, move)
 
     def play_game(self):
