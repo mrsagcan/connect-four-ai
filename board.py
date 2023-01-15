@@ -2,26 +2,34 @@ class Board:
     HEIGHT = 7
     WIDTH = 8
 
+
     def __init__(self, orig=None):
         if orig:
-            self.board = [list(col) for col in orig.board]
+            self.board = [list(col) for col in orig.board] #if there is a new board state comes as an input
         else:
-            self.board = [['.' for _ in range(8)] for _ in range(7)]
+            self.board = [['.' for _ in range(8)] for _ in range(7)] #if not is start a new one
 
+    #Prints the board
     def print_board(self):
         for row in self.board:
             print(' '.join(row))
         print('\n')
 
+    #Creates children states of that current state (usually 8 states)
     def make_children(self, player):
         children = []
         for i in range(self.WIDTH):
             child = Board(self)
+
             should_append = child.make_move_AI(player, i)
+
+            #If there is a problem with that move do not make it a child
             if should_append:
                 children.append((i, child))
+
         return children
 
+    #Makes the move to the state
     def make_move_AI(self, player, column):
         if column < self.WIDTH :
             for i in range(self.HEIGHT - 1, -1, -1):
@@ -32,7 +40,7 @@ class Board:
             print("Invalid input. AI has a error. The number between 0 and 7.")
             return False
 
-    # Function control input value and move point in board
+    #Makes the move to the state again but this time manual player
     def make_move_manuel_player(self, player, column):
         if column < self.WIDTH:
             for i in range(self.HEIGHT - 1, -1, -1):
@@ -42,9 +50,9 @@ class Board:
         else:
             print("Invalid input. Please enter a number between 0 and 7.")
 
-    # if games is continuing return 0
-    # if player1 win return 1, if Player2 win return 2
-    # if board has not empty point return 0
+    # if player1 wins return 1, if player2 wins return 2
+    # if board isn't empty point return 0
+    # if board is full return -1
     def check_board(self, player1, player2):
         if self.is_full():
             print("The board is full. Game is a draw.")
