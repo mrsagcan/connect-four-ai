@@ -17,19 +17,18 @@ def swap_player(player):
 class Ai:
 
 
-    def __init__(self, depthLimit, heuristic_choose):
-        self.heuristic_choose = heuristic_choose
+    def __init__(self, depthLimit, heuristic_choice):
         self.depthLimit = depthLimit
         self.heuristic = None
-        self.choose_heuristic()
+        self.choose_heuristic(heuristic_choice)
 
     #Chooses a heuristic according to input. 
-    def choose_heuristic(self):
-        if self.heuristic_choose == '1':
+    def choose_heuristic(self, heuristic_choice):
+        if heuristic_choice == '1':
             self.heuristic = self.heuristic1
-        elif self.heuristic_choose == '2':
+        elif heuristic_choice == '2':
             self.heuristic = self.heuristic2
-        elif self.heuristic_choose == '3':
+        elif heuristic_choice == '3':
             self.heuristic = self.heuristic3
         else:
             print("ERROR: Your heuristic choice is invalid.")
