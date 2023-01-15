@@ -15,23 +15,12 @@ def swap_player(player):
 
 class Ai:
 
-<<<<<<< Updated upstream
-    def __init__(self, depthLimit, heuristic):
-        self.depthLimit = depthLimit
-        self.heuristic = None
-        if heuristic == "1":
-            self.heuristic = self.heuristic1
-        elif heuristic == "2":
-            self.heuristic = self.heuristic2
-        elif heuristic == "3":
-=======
     def choose_heuristic(self):
         if self.heuristic_choose == '1':
             self.heuristic = self.heuristic1
         elif self.heuristic_choose == '2':
             self.heuristic = self.heuristic2
         elif self.heuristic_choose == '3':
->>>>>>> Stashed changes
             self.heuristic = self.heuristic3
         else:
             print("ERROR: Your heuristic choose is wrong or have a lot of number.")
@@ -67,6 +56,7 @@ class Ai:
 
         for child in children:
             move, childboard = child
+            # print(child)
             temp = self.alpha_beta(childboard, depth - 1, swap_player(player), alpha, beta)[0]
             if swap(temp, best_score):
                 best_score = temp
@@ -87,12 +77,8 @@ class Ai:
         # check rows
         for row in range(7):
             for col in range(4):
-<<<<<<< Updated upstream
-                if state[row][col] == player and state[row][col + 1] == player and state[row][col + 2] == player and state[row][col + 3] == player:
-=======
                 if state[row][col] == player and state[row][col + 1] == player and state[row][col + 2] == player and \
                         state[row][col + 3] == player:
->>>>>>> Stashed changes
                     score += 1
         # check columns
         for col in range(7):
@@ -103,13 +89,6 @@ class Ai:
         # check diagonals
         for row in range(3):
             for col in range(4):
-<<<<<<< Updated upstream
-                if state[row][col] == player and state[row + 1][col + 1] == player and state[row + 2][col + 2] == player and state[row + 3][col + 3] == player:
-                    score += 1
-        for row in range(3):
-            for col in range(3, 7):
-                if state[row][col] == player and state[row + 1][col - 1] == player and state[row + 2][col - 2] == player and state[row + 3][col - 3] == player:
-=======
                 if state[row][col] == player and state[row + 1][col + 1] == player and state[row + 2][
                     col + 2] == player and state[row + 3][col + 3] == player:
                     score += 1
@@ -117,7 +96,6 @@ class Ai:
             for col in range(3, 7):
                 if state[row][col] == player and state[row + 1][col - 1] == player and state[row + 2][
                     col - 2] == player and state[row + 3][col - 3] == player:
->>>>>>> Stashed changes
                     score += 1
         return score
 

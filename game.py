@@ -46,20 +46,9 @@ class Game:
     def human_vs_ai(self, heuristic, depth):
         print("Starting a game of Human vs AI...")
         # Code to start the game goes here
-<<<<<<< Updated upstream
-        ai = Ai(6, heuristic)
-=======
         ai = Ai(heuristic)
         ai.depthLimit = int(depth)
->>>>>>> Stashed changes
         while True:
-
-            self.board.print_board()
-            result = self.board.check_board(self.player_1, self.player_2)
-            if result != 0:
-                break
-            move = self.input_player(self.player_1)
-            self.board.make_move_manuel_player(self.player_1, move)
 
             self.board.print_board()
             result = self.board.check_board(self.player_1, self.player_2)
@@ -71,23 +60,23 @@ class Game:
             run_time = end_time - start_time
             print("Run time: AI player 1", run_time)
             print("move " + str(move))
-            self.board.make_move_AI(self.player_2, move)
+            self.board.make_move_AI(self.player_1, move)
+
+            self.board.print_board()
+            result = self.board.check_board(self.player_1, self.player_2)
+            if result != 0:
+                break
+            move = self.input_player(self.player_2)
+            self.board.make_move_manuel_player(self.player_2, move)
 
     def ai_vs_ai(self, heuristic_1, heuristic_2, depth1, depth2):
         print("Starting a game of AI vs AI...")
         # Code to start the game goes here
-<<<<<<< Updated upstream
-        ai_1 = Ai(6, heuristic_1)
-        ai_2 = Ai(6, heuristic_2)
-=======
         ai_1 = Ai(heuristic_1)
         ai_2 = Ai(heuristic_2)
         ai_1.depthLimit = int(depth1)
         ai_2.depthLimit = int(depth2)
->>>>>>> Stashed changes
         while True:
-
-
 
             self.board.print_board()
             result = self.board.check_board(self.player_1, self.player_2)
@@ -143,7 +132,7 @@ class Game:
             print("\n1. h1 is basic")
             print("2. h2 is medium")
             print("3. h3 is hard")
-            print("Choose a heuristic for AI Player 1")
+            print("Choose a heuristic for AI Player 1 :")
             heuristic1 = input("Please select an option: ")
             if heuristic1 != '1' and heuristic1 != '2' and heuristic1 != '3':
                 print("Invalid choice. Please select a valid option.")
@@ -151,7 +140,7 @@ class Game:
             print("\n1. h1 is basic")
             print("2. h2 is medium")
             print("3. h3 is hard")
-            print("Choose a heuristic for AI Player 2")
+            print("Choose a heuristic for AI Player 2 :")
             heuristic2 = input("Please select an option: ")
             if heuristic2 != '1' and heuristic2 != '2' and heuristic2 != '3':
                 print("Invalid choice. Please select a valid option.")
