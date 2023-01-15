@@ -15,15 +15,14 @@ def swap_player(player):
 
 class Ai:
 
-    def __init__(self, heuristic):
-        print("hello i am ai")
-        self.depthLimit = 0
-        self.heuristic = self.heuristic2
-        if heuristic == 1:
+    def __init__(self, depthLimit, heuristic):
+        self.depthLimit = depthLimit
+        self.heuristic = None
+        if heuristic == "1":
             self.heuristic = self.heuristic1
-        elif heuristic == 2:
+        elif heuristic == "2":
             self.heuristic = self.heuristic2
-        elif heuristic == 3:
+        elif heuristic == "3":
             self.heuristic = self.heuristic3
 
     def ai_move(self, board):
@@ -50,7 +49,6 @@ class Ai:
 
         for child in children:
             move, childboard = child
-            # print(child)
             temp = self.alpha_beta(childboard, depth - 1, swap_player(player), alpha, beta)[0]
             if swap(temp, bestScore):
                 bestScore = temp
@@ -70,7 +68,7 @@ class Ai:
         # check rows
         for row in range(7):
             for col in range(4):
-                if state[row][col] == player and state[row][col + 1] == player and state[row][col + 2] == player and board[row][col + 3] == player:
+                if state[row][col] == player and state[row][col + 1] == player and state[row][col + 2] == player and state[row][col + 3] == player:
                     score += 1
         # check columns
         for col in range(7):
@@ -80,11 +78,11 @@ class Ai:
         # check diagonals
         for row in range(3):
             for col in range(4):
-                if state[row][col] == player and state[row + 1][col + 1] == player and state[row + 2][col + 2] == player and board[row + 3][col + 3] == player:
+                if state[row][col] == player and state[row + 1][col + 1] == player and state[row + 2][col + 2] == player and state[row + 3][col + 3] == player:
                     score += 1
         for row in range(3):
             for col in range(3, 7):
-                if state[row][col] == player and state[row + 1][col - 1] == player and state[row + 2][col - 2] == player and board[row + 3][col - 3] == player:
+                if state[row][col] == player and state[row + 1][col - 1] == player and state[row + 2][col - 2] == player and state[row + 3][col - 3] == player:
                     score += 1
         return score
 
